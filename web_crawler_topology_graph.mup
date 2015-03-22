@@ -1,0 +1,406 @@
+{
+  "title": "Web Crawler Topology",
+  "id": 1,
+  "formatVersion": 2,
+  "ideas": {
+    "1": {
+      "title": "URL Spout",
+      "id": 2,
+      "ideas": {
+        "1": {
+          "title": "URL Generator (Decide whether it is the time to fetch this url)",
+          "id": 4,
+          "ideas": {
+            "1": {
+              "title": "URL Partitioner (Group urls by their domain name)",
+              "id": 6,
+              "ideas": {
+                "1": {
+                  "title": "URL Async Fetcher (Fetch the html source )",
+                  "id": 7,
+                  "ideas": {
+                    "1": {
+                      "title": "URL Link Parser",
+                      "id": 8,
+                      "ideas": {
+                        "1": {
+                          "title": "Check the MD5 of Links",
+                          "id": 11,
+                          "ideas": {
+                            "1": {
+                              "title": "If Match",
+                              "id": 12,
+                              "ideas": {
+                                "1": {
+                                  "title": "Update FetchTime, and Cassandra",
+                                  "id": 26,
+                                  "attr": {
+                                    "style": {
+                                      "background": "#99ccff"
+                                    }
+                                  }
+                                }
+                              }
+                            },
+                            "2": {
+                              "title": "If Not Match",
+                              "id": 13,
+                              "ideas": {
+                                "1": {
+                                  "title": "1. Update PrevModifiedTime 2. Update Link MD5",
+                                  "id": 14,
+                                  "ideas": {}
+                                },
+                                "2": {
+                                  "title": "Find New Links",
+                                  "id": 16,
+                                  "ideas": {
+                                    "4": {
+                                      "title": "Finalize",
+                                      "id": 55,
+                                      "ideas": {
+                                        "1": {
+                                          "title": "Social Link",
+                                          "id": 21,
+                                          "ideas": {
+                                            "1": {
+                                              "title": "Insert into Site CF",
+                                              "id": 28,
+                                              "attr": {
+                                                "style": {
+                                                  "background": "#99ccff"
+                                                }
+                                              }
+                                            }
+                                          }
+                                        },
+                                        "0.5": {
+                                          "title": "URL",
+                                          "id": 17,
+                                          "ideas": {
+                                            "1": {
+                                              "title": "Insert into Page CF",
+                                              "id": 22,
+                                              "ideas": {
+                                                "1": {
+                                                  "title": "Enqueue into \"domain:*\" queueu",
+                                                  "id": 32,
+                                                  "ideas": {},
+                                                  "attr": {
+                                                    "style": {
+                                                      "background": "#ff6600"
+                                                    }
+                                                  }
+                                                },
+                                                "2": {
+                                                  "title": "Enqueue domainName into \"crawler:domain\" queueu",
+                                                  "id": 69,
+                                                  "attr": {
+                                                    "style": {
+                                                      "background": "#ff6600"
+                                                    }
+                                                  }
+                                                }
+                                              },
+                                              "attr": {
+                                                "style": {
+                                                  "background": "#99ccff"
+                                                }
+                                              }
+                                            }
+                                          }
+                                        },
+                                        "0.75": {
+                                          "title": "RSS",
+                                          "id": 19,
+                                          "ideas": {
+                                            "1": {
+                                              "title": "Insert into Feed CF",
+                                              "id": 27,
+                                              "ideas": {
+                                                "1": {
+                                                  "title": "Enqueue into RSS Queue",
+                                                  "attr": {
+                                                    "style": {
+                                                      "background": "#ff6600"
+                                                    }
+                                                  },
+                                                  "ideas": {},
+                                                  "id": 62
+                                                }
+                                              },
+                                              "attr": {
+                                                "style": {
+                                                  "background": "#99ccff"
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                      },
+                                      "attr": {
+                                        "style": {
+                                          "background": "#ffcc00"
+                                        }
+                                      }
+                                    }
+                                  }
+                                },
+                                "3": {
+                                  "title": "Orginal Link ",
+                                  "id": 24,
+                                  "ideas": {
+                                    "1": {
+                                      "title": "Update FetchTime and Cassandra",
+                                      "id": 29,
+                                      "ideas": {},
+                                      "attr": {
+                                        "style": {
+                                          "background": "#99ccff"
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "attr": {
+                        "style": {
+                          "background": "#ffcc00"
+                        }
+                      }
+                    },
+                    "2": {
+                      "title": "Content Parser",
+                      "id": 10,
+                      "ideas": {
+                        "1": {
+                          "title": "Check the Length of Text Content",
+                          "id": 35,
+                          "ideas": {
+                            "1": {
+                              "title": "If Match",
+                              "id": 37,
+                              "ideas": {}
+                            },
+                            "2": {
+                              "title": "If Not Match",
+                              "id": 39,
+                              "ideas": {
+                                "1": {
+                                  "title": "Detect Page Type",
+                                  "id": 40,
+                                  "ideas": {
+                                    "1": {
+                                      "title": "If Is Forum",
+                                      "id": 41
+                                    },
+                                    "2": {
+                                      "title": "Else",
+                                      "id": 42,
+                                      "ideas": {
+                                        "1": {
+                                          "title": "Parse Main Content",
+                                          "id": 44,
+                                          "ideas": {
+                                            "1": {
+                                              "title": "Keywords Parser",
+                                              "id": 50,
+                                              "attr": {
+                                                "style": {
+                                                  "background": "#ffcc00"
+                                                }
+                                              },
+                                              "ideas": {
+                                                "1": {
+                                                  "title": "If Find Matched Project",
+                                                  "id": 51,
+                                                  "ideas": {
+                                                    "1": {
+                                                      "title": "Content Score",
+                                                      "id": 54,
+                                                      "attr": {
+                                                        "style": {
+                                                          "background": "#ffcc00"
+                                                        }
+                                                      },
+                                                      "ideas": {
+                                                        "1": {
+                                                          "title": "Content Finalize",
+                                                          "id": 56,
+                                                          "attr": {
+                                                            "style": {
+                                                              "background": "#ffcc00"
+                                                            }
+                                                          },
+                                                          "ideas": {
+                                                            "1": {
+                                                              "title": "Insert into Blog Item",
+                                                              "id": 57,
+                                                              "attr": {
+                                                                "style": {
+                                                                  "background": "#99ccff"
+                                                                }
+                                                              }
+                                                            },
+                                                            "2": {
+                                                              "title": "Insert into Entry",
+                                                              "id": 58,
+                                                              "attr": {
+                                                                "style": {
+                                                                  "background": "#99ccff"
+                                                                }
+                                                              }
+                                                            },
+                                                            "3": {
+                                                              "title": "Update Counters in Redis",
+                                                              "id": 59,
+                                                              "attr": {
+                                                                "style": {
+                                                                  "background": "#ff6600"
+                                                                }
+                                                              }
+                                                            },
+                                                            "4": {
+                                                              "title": "Language Detection",
+                                                              "id": 61
+                                                            }
+                                                          }
+                                                        }
+                                                      }
+                                                    }
+                                                  }
+                                                },
+                                                "2": {
+                                                  "title": "If Not",
+                                                  "id": 53
+                                                }
+                                              }
+                                            }
+                                          }
+                                        },
+                                        "2": {
+                                          "title": "1. Update PrevModifiedTime 2. Update Link MD5",
+                                          "id": 45
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "attr": {
+                        "style": {
+                          "background": "#ffcc00"
+                        }
+                      }
+                    }
+                  },
+                  "attr": {
+                    "style": {
+                      "background": "#ffcc00"
+                    }
+                  }
+                },
+                "0.5": {
+                  "title": "Enqueue domains in the waiting queue, after they passed the interval time",
+                  "id": 73,
+                  "attr": {
+                    "style": {
+                      "background": "#ff6600"
+                    }
+                  }
+                }
+              },
+              "attr": {
+                "style": {
+                  "background": "#ffcc00"
+                }
+              }
+            }
+          },
+          "attr": {
+            "style": {
+              "background": "#ffcc00"
+            }
+          }
+        }
+      },
+      "attr": {
+        "style": {
+          "background": "#99cc00"
+        }
+      }
+    },
+    "11": {
+      "title": "RSS Spout",
+      "id": 68,
+      "attr": {
+        "style": {
+          "background": "#99cc00"
+        }
+      },
+      "ideas": {
+        "1": {
+          "title": "RSS Async Fetcher (Fetch rss raw xml)",
+          "id": 70,
+          "attr": {
+            "style": {
+              "background": "#ffcc00"
+            }
+          },
+          "ideas": {
+            "1": {
+              "title": "RSS Parser (Get each entry from rss raw html ,  wrap into webPage class)",
+              "id": 72,
+              "attr": {
+                "style": {
+                  "background": "#ffcc00"
+                }
+              },
+              "ideas": {
+                "1": {
+                  "title": "Check if url already exists in Cassandra",
+                  "attr": {
+                    "style": {
+                      "background": "#99ccff"
+                    }
+                  },
+                  "ideas": {
+                    "1": {
+                      "title": "If Not Exists",
+                      "id": 75
+                    },
+                    "2": {
+                      "title": "If Exists",
+                      "id": 76
+                    }
+                  },
+                  "id": 74
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "links": [
+    {
+      "ideaIdFrom": 75,
+      "ideaIdTo": 7,
+      "attr": {
+        "style": {
+          "color": "#999999",
+          "lineStyle": "solid"
+        }
+      }
+    }
+  ]
+}
